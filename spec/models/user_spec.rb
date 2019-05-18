@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   describe "user" do
 
     before :each do
-      @user = User.new(name: "Example User", email: "user@example.com")
+      @user = User.new(name: "Example User", email: "user@example.com", password: "botreetest", password_confirmation: "botreetest")
     end
 
     it "should be valid" do
@@ -49,11 +49,13 @@ RSpec.describe User, type: :model do
       @user.save
       expect(duplicate_user).not_to be_valid
     end
-    it "email addresses should be saved as lower-case" do
-      mixed_case_email = "Foo@ExAMPle.CoM"
-      @user.email = mixed_case_email
-      @user.save
-      expect(mixed_case_email.downcase).to eql(@user.reload.email)
+    it "password should be present (nonblank)" do
+      @user.password = @user.password_confirmation = " " * 8
+      expect(@user).not_to be_valid
+    end
+    it "password should have a minimum length" do
+      @user.password = @user.password_confirmation = "a" * 7
+      expect(@user).not_to be_valid
     end
   end
 

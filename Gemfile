@@ -39,6 +39,7 @@ gem 'haml', '~> 5.1'
 gem 'haml-rails', '~> 2.0'
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
 gem 'react-rails', '~> 2.5'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 
