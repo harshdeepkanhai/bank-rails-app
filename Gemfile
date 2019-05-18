@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml', '~> 5.1'
 gem 'haml-rails', '~> 2.0'
+gem 'webpacker', '~> 4.0', '>= 4.0.2'
+gem 'react-rails', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
