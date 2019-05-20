@@ -6,7 +6,19 @@ class User < ApplicationRecord
     format: { with: VALID_EMAIL_REGEX },
     uniqueness: { case_sensitive: false }
   has_secure_password
+
+  has_one :bank_account
   validates :password, presence: true, length: { minimum: 8 }
+  
+  before_save :format_name
+
+  def format_name
+    self.name = name.upcase
+  end
+
+  def to_s
+    "#{name}"
+  end
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
