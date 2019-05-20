@@ -5,3 +5,6 @@
       %h1
         = gravatar_for @user
         = @user.name
+.row
+  .col-md-12
+    = link_to "Account Details", bank_account_path(@bank_account.id), class: "btn btn-lg btn-primary"
