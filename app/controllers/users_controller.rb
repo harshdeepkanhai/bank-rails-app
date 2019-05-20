@@ -5,13 +5,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @bank_account = BankAccount.find(params[:id])
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
+      user = User.last
+      BankAccount.create!(user: user)
       log_in @user
-      flash[:success] = "Welcome to the Banking App!"
+      flash[:success] = "Welcome to the Banking App! Your account has been created"
       redirect_to @user
     else
       render 'new'
