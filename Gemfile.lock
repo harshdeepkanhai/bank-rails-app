@@ -54,6 +54,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.12)
+    bcrypt (3.1.12-x64-mingw32)
     bindex (0.7.0)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
@@ -62,14 +63,13 @@ GEM
       sassc (>= 2.0.0)
     builder (3.2.3)
     byebug (11.0.1)
-    capybara (3.20.1)
+    capybara (3.20.2)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
-      uglifier
       xpath (~> 3.2)
     childprocess (1.0.1)
       rake (< 13.0)
@@ -91,12 +91,13 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.11.0)
+    ffi (1.11.0-x64-mingw32)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     haml (5.1.0)
       temple (>= 0.8.0)
       tilt
-    haml-rails (2.0.0)
+    haml-rails (2.0.1)
       actionpack (>= 5.1)
       activesupport (>= 5.1)
       haml (>= 4.0.6, < 6.0)
@@ -133,8 +134,11 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     msgpack (1.2.10)
+    msgpack (1.2.10-x64-mingw32)
     nio4r (2.3.1)
     nokogiri (1.10.3)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.3-x64-mingw32)
       mini_portile2 (~> 2.4.0)
     public_suffix (3.0.3)
     puma (3.12.1)
@@ -239,8 +243,11 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2019.1)
+      tzinfo (>= 1.0.0)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    wdm (0.1.1)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -258,6 +265,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   bcrypt (~> 3.1, >= 3.1.12)
@@ -284,6 +292,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
+  wdm (~> 0.1.1)
   web-console (>= 3.3.0)
   webpacker (~> 4.0, >= 4.0.2)
 
