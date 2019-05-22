@@ -18,7 +18,6 @@ module Api
         bank_account = ::BankAccounts::PerformTransaction.new(data).execute! unless errors.size > 0
         render json: { errors: errors }, status: 402 if errors.size > 0
         render json: { balance: bank_account.balance }  unless errors.size > 0        
-        end
       end
     end
   end

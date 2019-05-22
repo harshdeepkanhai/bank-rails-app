@@ -12,7 +12,7 @@ module BankAccounts
 
     def execute!
       validate_existence_of_account!
-      if %w(withdraw transfer).include ? @transaction_type and @bank_account.present? and @recipient_account.present?
+      if @bank_account.present? && @recipient_account.present? && ["withdraw", "transfer"].include?(@transaction_type)
         validate_transaction!
       end
       @errors

@@ -23,9 +23,9 @@ module BankAccounts
 
 
     def execute!
-      if %w(withdraw deposit).include ? @transaction_type
+      if %w(withdraw deposit).include?(@transaction_type)
         create_transaction!(@bank_account, @amount, @transaction_type, @recipient_id)
-      elsif  @transaction_type == "transfer"
+      elsif  @transaction_type.eql? "transfer"
         create_transaction!(@bank_account, @amount, "withdraw", @recipient_id)
         create_transaction!(@recipient_account, @amount, "deposit", @bank_account.account_numbers)
       end
