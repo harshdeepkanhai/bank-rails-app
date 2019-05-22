@@ -9,34 +9,25 @@ module BankAccounts
       @recipient_account = BankAccount.where(account_number: @recipient_id).first
     end
 
+    def create_transaction!(bank_account, amount, transaction_type, recipient_id)
+      AccountTransaction.create!(
+        bank_account: bank_account,
+        amount: amount,
+        transaction_type: transaction_type,
+        recipient_id: recipient_id
+      )
+      bank_account.update(balance: bank_account.balance - amount) if transaction_type = "withdraw"
+      bank_account.update(balance: bank_account.balance + amount) if transaction_type = "deposit"
+      raise ActiveRecord::Rollback unless bank_account.present?
+    end
+
+
     def execute!
-      if @transaction_type == "withdraw" || @transaction_type == "deposit"
-        AccountTransaction.create!(
-          bank_account: @bank_account,
-          amount: @amount,
-          transaction_type: @transaction_type,
-          recipient_id: @recipient_id
-        )
-        if @transaction_type == "withdraw"
-          @bank_account.update!(balance: @bank_account.balance - @amount)
-        elsif  @transaction_type == "deposit"
-          @bank_account.update!(balance: @bank_account.balance + @amount)
-        end
+      if %w(withdraw deposit).include ? @transaction_type
+        create_transaction!(@bank_account, @amount, @transaction_type, @recipient_id)
       elsif  @transaction_type == "transfer"
-        AccountTransaction.create!(
-          bank_account: @bank_account,
-          amount: @amount,
-          transaction_type: "withdraw",
-          recipient_id: @recipient_id
-        )
-        AccountTransaction.create!(
-          bank_account: @recipient_account,
-          amount: @amount,
-          transaction_type: "deposit",
-          recipient_id: @bank_account.account_number
-        )
-        @bank_account.update!(balance: @bank_account.balance - @amount)
-        @recipient_account.update!(balance: @recipient_account.balance + @amount)
+        create_transaction!(@bank_account, @amount, "withdraw", @recipient_id)
+        create_transaction!(@recipient_account, @amount, "deposit", @bank_account.account_numbers)
       end
       @bank_account 
     end
