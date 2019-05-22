@@ -14,7 +14,7 @@ module BankRailsApp
     config.generators do |g|
       g.template_engine :haml
     end
-
+    config.assets.initialize_on_precompile = false
     Rails.application.config.autoload_paths << "#{Rails.root}/app/operations"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
