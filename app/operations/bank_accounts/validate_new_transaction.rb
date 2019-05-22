@@ -12,9 +12,7 @@ module BankAccounts
 
     def execute!
       validate_existence_of_account!
-      if account_present && transaction_deduction
-        validate_transaction!
-      end
+      validate_transaction! if account_present && transaction_deduction
       @errors
     end
 
