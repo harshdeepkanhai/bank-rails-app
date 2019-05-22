@@ -5,8 +5,8 @@ module BankAccounts
       @transaction_type = transaction_type
       @bank_account_id = bank_account_id
       @recipient_id = recipient_id
-      @bank_account = BankAccount.where(id: @bank_account_id).first
-      @recipient_account = BankAccount.where(account_number: @recipient_id).first
+      @bank_account = BankAccount.where(id: bank_account_id).first
+      @recipient_account = BankAccount.where(account_number: recipient_id).first
     end
 
     def create_transaction!(bank_account, amount, transaction_type, recipient_id)
