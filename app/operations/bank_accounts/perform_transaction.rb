@@ -10,6 +10,7 @@ module BankAccounts
     end
 
     def create_transaction!(bank_account, amount, transaction_type, recipient_id)
+      ActiveRecord::Base.transaction do
       AccountTransaction.create!(
         bank_account: bank_account,
         amount: amount,
@@ -18,6 +19,7 @@ module BankAccounts
       )
       bank_account.update(balance: bank_account.balance - amount) if transaction_type = "withdraw"
       bank_account.update(balance: bank_account.balance + amount) if transaction_type = "deposit"
+      end
       raise ActiveRecord::Rollback unless bank_account.present?
     end
 
