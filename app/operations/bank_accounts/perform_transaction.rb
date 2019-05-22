@@ -16,8 +16,8 @@ module BankAccounts
           transaction_type: transaction_type,
           recipient_id: recipient_id
         )
-        bank_account.update(balance: bank_account.balance - amount) if transaction_type = "withdraw"
-        bank_account.update(balance: bank_account.balance + amount) if transaction_type = "deposit"
+        bank_account.update(balance: bank_account.balance - amount) if transaction_type == "withdraw"
+        bank_account.update(balance: bank_account.balance + amount) if transaction_type == "deposit"
       raise ActiveRecord::Rollback unless bank_account.present?
     end
 
