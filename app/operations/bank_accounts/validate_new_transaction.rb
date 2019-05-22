@@ -26,7 +26,7 @@ module BankAccounts
         @bank_account.present? && @recipient_account.present?
       end
       def transaction_deduction
-        %w(withdraw transfer).include?(@transaction_type
+        %w(withdraw transfer).include?(@transaction_type)
       end
       
       def validate_existence_of_account!
