@@ -12,7 +12,7 @@ module BankAccounts
 
     def execute!
       validate_existence_of_account!
-      if (@transaction_type == "withdraw" or @transaction_type == "transfer") and @bank_account.present? and @recipient_account.present?
+      if %w(withdraw transfer).include ? @transaction_type and @bank_account.present? and @recipient_account.present?
         validate_transaction!
       end
       @errors
@@ -21,19 +21,12 @@ module BankAccounts
     private
 
       def validate_transaction!
-        if @bank_account.balance - @amount < 0.00
-          @errors << "Not enough funds"
-        end
+        @errors << "Not enough funds" if @bank_account.balance - @amount < 0.00
       end
       
       def validate_existence_of_account!
-        if @bank_account.blank?
-          @errors << "Account not found"
-        end
-
-        if @recipient_account.blank?
-          @errors << "Recipient Account not found"
-        end
+        @errors << "Account not found" if @bank_account.blank?
+        @errors << "Recipient Account not found" if @recipient_account.blank?
       end
   end
 end
