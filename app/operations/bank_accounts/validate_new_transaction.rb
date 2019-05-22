@@ -12,9 +12,7 @@ module BankAccounts
 
     def execute!
       validate_existence_of_account!
-      transactions = %w(withdraw transfer)
-      account_present = @bank_account.present? && @recipient_account.present?
-      if account_present && transactions.include?(@transaction_type)
+      if account_present && transaction_deduction
         validate_transaction!
       end
       @errors
@@ -24,6 +22,13 @@ module BankAccounts
 
       def validate_transaction!
         @errors << "Not enough funds" if @bank_account.balance - @amount < 0.00
+      end
+
+      def account_present
+        @bank_account.present? && @recipient_account.present?
+      end
+      def transaction_deduction
+        %w(withdraw transfer).include?(@transaction_type
       end
       
       def validate_existence_of_account!
